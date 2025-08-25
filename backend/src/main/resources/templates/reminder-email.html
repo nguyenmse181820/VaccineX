@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Nhắc nhở tiêm chủng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #397FE7;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .reminder-section {
+            margin-bottom: 30px;
+        }
+
+        .company-info {
+            background-color: #f7f7f7;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            font-size: 0.9em;
+        }
+
+        .company-info h3 {
+            color: #397FE7;
+            margin-top: 0;
+        }
+
+        .footer {
+            background-color: #397FE7;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.8em;
+        }
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Header with Title -->
+    <div class="header">
+        <h1>Nhắc nhở tiêm chủng</h1>
+    </div>
+    <!-- Main Content -->
+    <div class="content">
+        <div class="reminder-section">
+            <p>Kính gửi <strong th:text="${reminder.userFullName}">Người dùng</strong>,</p>
+            <p>Đây là lời nhắc nhở rằng con của bạn, <strong th:text="${reminder.childFullName}">Tên trẻ</strong>, sẽ
+                được tiêm vắc-xin <strong th:text="${reminder.vaccineName}">Tên vắc-xin</strong> (<em
+                        th:text="${reminder.vaccineCode}">Mã vắc-xin</em>) vào
+                <strong th:text="${#temporals.format(reminder.date, 'dd MMM yyyy HH:mm')}">Ngày giờ</strong>
+            <p th:if="${reminder.comboName != null}">
+                <strong>Gói kết hợp:</strong> <span th:text="${reminder.comboName}">Tên gói</span>
+            </p>
+            <p>Nếu có thắc mắc, vui lòng liên hệ với bác sĩ <strong th:text="${reminder.doctorFullName}">Tên bác
+                sĩ</strong>.</p>
+            <p><strong>Ghi chú:</strong> <em th:text="${reminder.notes}">Ghi chú bổ sung</em></p>
+        </div>
+        <!-- Company Information Section -->
+        <div class="company-info">
+            <h3>Về Chúng Tôi</h3>
+            <p>Chào mừng bạn đến với <strong>VaccineX</strong> – Cơ sở tiêm chủng uy tín và chất lượng tại TP.HCM.</p>
+            <h4>Sứ Mệnh Của Chúng Tôi</h4>
+            <p>Chúng tôi cam kết cung cấp dịch vụ tiêm chủng chất lượng cao, giúp bảo vệ sức khỏe cộng đồng và ngăn ngừa
+                bệnh truyền nhiễm.</p>
+            <h4>Tại Sao Lựa Chọn VaccineX?</h4>
+            <ul>
+                <li><strong>Đội Ngũ Chuyên Gia:</strong> Y bác sĩ giàu kinh nghiệm, chăm sóc tận tâm.</li>
+                <li><strong>Vị Trí Tiện Lợi:</strong> 79 Điện Biên Phủ, Bình Thạnh, TPHCM.</li>
+                <li><strong>Dịch Vụ Đa Dạng:</strong> Tiêm chủng cho mọi đối tượng và các vắc xin cho du lịch quốc tế.
+                </li>
+                <li><strong>Đặt Lịch Dễ Dàng:</strong> Hệ thống đặt lịch trực tuyến nhanh chóng và tiện lợi.</li>
+            </ul>
+            <h4>Liên Hệ Với Chúng Tôi</h4>
+            <p>
+                Email: <a href="mailto:info@vaccinex.com">info@vaccinex.com</a><br>
+                Điện thoại: 0123456789<br>
+                Địa chỉ: 79 Điện Biên Phủ, Bình Thạnh, TPHCM
+            </p>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+        <p>Đây là tin nhắn tự động. Vui lòng không trả lời.</p>
+    </div>
+</div>
+</body>
+</html>

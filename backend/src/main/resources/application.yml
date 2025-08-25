@@ -1,0 +1,95 @@
+spring:
+  application:
+    name: vaccine
+
+  # KAFKA
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: vaccine-email-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.sba301.vaccinex.dto.internal.kafka
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  # MAIL
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: theanh08042004@gmail.com
+    password: lywt qpvr vklq fiuc
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+
+  # DATABASE
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:sqlserver://localhost:1433;databaseName=vaccine;user=sa;password=Admin@12345;encrypt=true;trustServerCertificate=true}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+  data:
+    jdbc:
+      dialect: sql_server
+
+# JWT
+jwt:
+  secret: 753474857438754387594385743975348574893759843753498776576576575765634545435365346534645645364565465347657547465
+  expiration: 863999999
+  refresh:
+    secret: 123454857438754387594385743975348574893759843753498776576576575765634545435365346534645645364565465347657554321
+    expiration: 864000000
+  algorithms: HmacSHA256
+application:
+  default-current-page: 1
+  default-page-size: 30
+
+# SWAGGER
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    tags-sorter: alpha
+  api-docs:
+    path: /api-docs
+  default-produces-media-type: application/json
+
+# VNPAY
+payment:
+  vnPay:
+    url: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+    tmnCode: 27R12FWP
+    secretKey: 6TP65UT7VDS79YG06C9KWAKR4J2VYVGW
+    returnUrl: http://localhost:8080/api/v1/payment/vn-pay-callback
+    version: 2.1.0
+    command: pay
+    orderType: other
+
+# BUSINESS
+price:
+  vaccine:
+    default: 0
+    below: 100000
+    higher: 501000
+    avg-begin: 101000
+    avg-end: 500000
+  combo:
+    default: 0
+    below: 300000
+    higher: 1001000
+    avg-begin: 301000
+    avg-end: 1000000
+
+business:
+  interval-after-active-vaccine: 30
+  interval-after-inactive-vaccine: 7
